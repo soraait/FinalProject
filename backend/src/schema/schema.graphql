@@ -1,0 +1,56 @@
+type Query {
+  login(email: String! , password: String!): AuthData
+  user: User
+  users: [User]!
+  product(id: ID!): Product
+  products: [Product]!
+}
+
+
+type Mutation {
+    signup(name: String! , email: String! , password: String! ): User   
+    createProduct(
+      product_id: String! ,
+      name: String! ,
+      brand: String! ,
+      model: String! ,
+      serailnumber: String! ,
+      imageUrl: String!): Product! 
+    updateProduct(
+      id: ID!,
+      product_id: String ,
+      name: String ,
+      brand: String ,
+      model: String ,
+      serailnumber: String ,
+      imageUrl: String): Product! 
+    deleteProduct(id: ID!): Product!      
+}
+
+scalar Date
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  products: [Product]!
+  createdAt: Date!
+}
+
+type Product {
+  id: ID!
+  product_id: String!
+  name: String!
+  brand: String!
+  model: String!
+  serailnumber: String!
+  imageUrl: String!
+  user: User!
+  createdAt: Date!
+}
+
+type AuthData {
+  userId: ID
+  jwt: String 
+}
